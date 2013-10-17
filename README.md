@@ -1,7 +1,7 @@
-README for pieDivPlot
+README for pieDivPlots
 ========================================================
 
-A function for making plots where points are pie charts showing compositions.
+A function for making plots where points are pie charts showing compositions. Code from work by Jillian Dunic wrapped into a function by Jarrett Byrnes.
 
 
 ```r
