@@ -38,7 +38,8 @@ data(duffy_2003)
 sp <- 18:23
 
 # plot the raw data
-pieDivPlot(diversity, Zost_change_mass, sp, data = duffy_2003)
+pieDivPlot(diversity, Zost_change_mass, sp, data = duffy_2003, cex.axis = 2, 
+    cex.lab = 2, radius = 0.1)
 ```
 
 <img src="figure/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="800px" height="600px" />
@@ -58,7 +59,7 @@ duffy_2003_Zost <- ddply(duffy_2003, names(duffy_2003)[c(4:5, sp)], summarise,
 duffy_2003_Zost$se_zost_change[which(is.na(duffy_2003_Zost$se_zost_change))] <- 0
 
 pieDivPlot(diversity, mean_zost_change, 3:8, se_zost_change, data = duffy_2003_Zost, 
-    ylim = c(-8, 13))
+    ylim = c(-8, 13), cex.axis = 2, cex.lab = 2, radius = 0.1)
 
 abline(lm(Zost_change_mass ~ diversity, data = duffy_2003), lwd = 1.5, lty = 2, 
     col = "red")
