@@ -44,6 +44,19 @@ pieDivPlot(diversity, Zost_change_mass, sp, data = duffy_2003, cex.axis = 2,
 
 <img src="figure/unnamed-chunk-2.png" title="plot of chunk unnamed-chunk-2" alt="plot of chunk unnamed-chunk-2" width="800px" height="600px" />
 
+
+To alleviate overlap, usee the jitterAmount argument as pieDivPlot can call the jitter function to spread out values on the X axis.
+
+```r
+set.seed(697)
+
+pieDivPlot(diversity, Zost_change_mass, sp, data = duffy_2003, cex.axis = 2, 
+    cex.lab = 2, radius = 0.1, jitterAmount = 0.2)
+```
+
+<img src="figure/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="800px" height="600px" />
+
+           
 Or you can plot the data after aggregating it and show error bars.
 
 
@@ -58,13 +71,14 @@ duffy_2003_Zost <- ddply(duffy_2003, names(duffy_2003)[c(4:5, sp)], summarise,
 # for treatments with only one replicate
 duffy_2003_Zost$se_zost_change[which(is.na(duffy_2003_Zost$se_zost_change))] <- 0
 
+set.seed(697)
 pieDivPlot(diversity, mean_zost_change, 3:8, se_zost_change, data = duffy_2003_Zost, 
-    ylim = c(-8, 13), cex.axis = 2, cex.lab = 2, radius = 0.1)
+    ylim = c(-8, 13), cex.axis = 2, cex.lab = 2, radius = 0.1, jitterAmount = 0.3)
 
 abline(lm(Zost_change_mass ~ diversity, data = duffy_2003), lwd = 1.5, lty = 2, 
     col = "red")
 ```
 
-<img src="figure/unnamed-chunk-3.png" title="plot of chunk unnamed-chunk-3" alt="plot of chunk unnamed-chunk-3" width="800px" height="600px" />
+<img src="figure/unnamed-chunk-4.png" title="plot of chunk unnamed-chunk-4" alt="plot of chunk unnamed-chunk-4" width="800px" height="600px" />
 
 

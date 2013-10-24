@@ -1,7 +1,7 @@
-README for pieDivPlot
+README for pieDivPlots
 ========================================================
 
-A function for making plots where points are pie charts showing compositions.
+A function for making plots where points are pie charts showing compositions. Code from work by Jillian Dunic wrapped into a function by Jarrett Byrnes.
 
 ```{r eval=FALSE}
 #first install the multifunc library to get the data for the example
@@ -28,6 +28,16 @@ pieDivPlot(diversity, Zost_change_mass, sp,
            data=duffy_2003, cex.axis=2, cex.lab=2, radius=0.1)
 
 ```
+
+To alleviate overlap, usee the jitterAmount argument as pieDivPlot can call the jitter function to spread out values on the X axis.
+```{r  fig.height=12, fig.width=16, out.height="600px", out.width="800px"}
+set.seed(697)
+
+pieDivPlot(diversity, Zost_change_mass, sp,
+           data=duffy_2003, cex.axis=2, cex.lab=2, radius=0.1,
+           jitterAmount=0.2)
+```
+           
 Or you can plot the data after aggregating it and show error bars.
 
 ```{r fig.height=12, fig.width=16, out.height="600px", out.width="800px"}
@@ -41,8 +51,9 @@ duffy_2003_Zost <- ddply(duffy_2003, names(duffy_2003)[c(4:5,sp)], summarise,
 #for treatments with only one replicate
 duffy_2003_Zost$se_zost_change[which(is.na(duffy_2003_Zost$se_zost_change))] <-0
 
+set.seed(697)
 pieDivPlot(diversity, mean_zost_change, 3:8, se_zost_change,
-           data=duffy_2003_Zost, ylim=c(-8,13), cex.axis=2, cex.lab=2, radius=0.1)
+           data=duffy_2003_Zost, ylim=c(-8,13), cex.axis=2, cex.lab=2, radius=0.1, jitterAmount=0.3)
 
 abline(lm(Zost_change_mass ~ diversity, data=duffy_2003), lwd=1.5, lty=2, col="red")
 ```

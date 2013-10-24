@@ -24,13 +24,15 @@ library(plotrix)
 pieDivPlot <- function(DiversityColname, FnColname, SpCols, errColname=NULL, data,
                        radius=0.05, col=brewer.pal(length(SpCols), "Set2"), 
                        controlCol="grey", errLwd=1,
-                       xlab=NA, ylab=NA, ...){
+                       xlab=NA, ylab=NA, 
+                       jitterAmount=NULL, ...){
   
   #Deal with the unquoted variable names
   arguments <- as.list(match.call()[-1])
   #print(arguments)
   
   Diversity <- data[[as.character(arguments$DiversityColname)]]
+  if(!is.null(jitterAmount)) Diversity <- jitter(Diversity, amount=jitterAmount)
   Fn <- data[[as.character(arguments$FnColname)]]
   if(!is.null(arguments$errColname))  err <- data[[as.character(arguments$errColname)]]
 
